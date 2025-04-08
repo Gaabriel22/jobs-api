@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
-import { Company } from "../models/company"
-import { update } from "lodash"
+import { Company } from "../models"
 
 export const companiesController = {
   index: async (req: Request, res: Response) => {
@@ -34,7 +33,7 @@ export const companiesController = {
   show: async (req: Request, res: Response) => {
     const { id } = req.params
     try {
-      const company = await Company.findByPk(id)
+      const company = await Company.findByPk(id, { include: "jobs" })
       if (!company) {
         res.status(404).json({ message: "Company not found" })
       }

@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express"
 import { candidatesController } from "./controllers/candidates-controller"
 import { companiesController } from "./controllers/companies-controller"
+import { jobsController } from "./controllers/jobs-controller"
 
 const router = express.Router()
 
@@ -19,5 +20,7 @@ router.get("/companies/:id", companiesController.show)
 router.post("/companies", companiesController.save)
 router.put("/companies/:id", companiesController.update)
 router.delete("/companies/:id", companiesController.delete)
+
+router.get("/jobs", jobsController.index)
 
 export { router }
