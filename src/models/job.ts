@@ -1,5 +1,12 @@
-import { DataTypes, Model } from "sequelize"
+import {
+  BelongsToManyAddAssociationMixin,
+  BelongsToManyCountAssociationsMixin,
+  BelongsToManyRemoveAssociationMixin,
+  DataTypes,
+  Model,
+} from "sequelize"
 import { sequelize } from "../database"
+import { CandidateInstance } from "./candidate"
 
 interface JobInstance extends Model {
   id: number
@@ -7,6 +14,12 @@ interface JobInstance extends Model {
   description: string
   limitDate: Date
   companyId: number
+  addCandidate: BelongsToManyAddAssociationMixin<CandidateInstance, number>
+  removeCandidate: BelongsToManyRemoveAssociationMixin<
+    CandidateInstance,
+    number
+  >
+  countCandidates: BelongsToManyCountAssociationsMixin
 }
 
 export const Job = sequelize.define<JobInstance>("jobs", {
